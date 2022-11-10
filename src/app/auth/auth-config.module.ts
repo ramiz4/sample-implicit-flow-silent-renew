@@ -8,7 +8,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
         authority: 'PASTE_YOUR_AUTHORITY_URL',
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
-        clientId: 'wcr3-frontend-client',
+        clientId: 'YOUR_CLIENT_ID',
         scope: `openid profile`,
         responseType: 'id_token token',
         silentRenewUrl: `${window.location.origin}/silent-renew.html`,
