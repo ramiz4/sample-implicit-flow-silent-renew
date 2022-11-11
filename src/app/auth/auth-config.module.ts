@@ -5,10 +5,10 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
   imports: [
     AuthModule.forRoot({
       config: {
-        authority: 'PASTE_YOUR_AUTHORITY_URL',
+        authority: 'http://localhost:8080/realms/myrealm',
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
-        clientId: 'YOUR_CLIENT_ID',
+        clientId: 'myclient',
         scope: `openid profile`,
         responseType: 'id_token token',
         silentRenewUrl: `${window.location.origin}/silent-renew.html`,

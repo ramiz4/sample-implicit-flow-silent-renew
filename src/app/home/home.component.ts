@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { OidcClientNotification, OidcSecurityService, OpenIdConfiguration, UserDataResult } from 'angular-auth-oidc-client';
 import { Observable } from 'rxjs';
