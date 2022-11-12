@@ -22,18 +22,14 @@ export class HomeComponent implements OnInit {
 
     this.oidcSecurityService.isAuthenticated$.subscribe(({ isAuthenticated }) => {
       this.isAuthenticated = isAuthenticated;
-
-      console.warn('isAuthenticated: ', isAuthenticated);
     });
   }
 
   login() {
-    console.log('start login');
     this.oidcSecurityService.authorize();
   }
 
   refreshSessionCheckSession() {
-    console.log('start refreshSession');
     this.oidcSecurityService.authorize();
   }
 
@@ -42,7 +38,6 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    console.log('start logoff');
     this.oidcSecurityService.logoff();
   }
 }

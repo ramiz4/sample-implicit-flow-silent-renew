@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+    h1 {
+        @apply text-3xl font-bold py-2;
+    }
+
+    h2 {
+        @apply text-2xl font-bold py-2;
+    }
+
+    pre {
+        @apply overflow-auto border border-gray-700;
+    }
+    
+    .btn {
+        @apply px-3 py-2 rounded-md text-sm font-medium cursor-pointer;
+    }
+
+    .btn-default {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+
+        &.active {
+            @apply bg-gray-900 text-white;
+        }
+    }
+}
