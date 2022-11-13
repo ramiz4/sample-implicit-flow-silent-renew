@@ -18,6 +18,23 @@ export class HeaderComponent implements OnInit {
   checkSessionChanged$!: Observable<boolean>;
   checkSessionChanged: any;
 
+  menuItems = [
+    { label: 'Dashboard', href: 'home' },
+    { label: 'Team', href: 'team' },
+    { label: 'Projects', href: 'projects' },
+    { label: 'Calendar', href: 'calendar' },
+    { label: 'Reports', href: 'reports' }
+  ];
+
+  userMenuItems: any[] = [];
+  //  = [
+  //   { label: 'Profile', href: 'profile', canShow: !this.isAuthenticated },
+  //   { label: 'Settings', href: 'settings', canShow: !this.isAuthenticated },
+  //   { label: 'Logout', href: 'logout', canShow: !this.isAuthenticated },
+  //   { label: 'RefreshSession', href: 'refresh-session', canShow: !this.isAuthenticated },
+  //   { label: 'Login', href: 'login', canShow: this.isAuthenticated }
+  // ]
+
   constructor(private renderer: Renderer2, private oidcSecurityService: OidcSecurityService) {
     this.renderer.listen('window', 'click', (e: Event) => {
       /**
@@ -45,6 +62,14 @@ export class HeaderComponent implements OnInit {
 
     this.oidcSecurityService.isAuthenticated$.subscribe(({ isAuthenticated }) => {
       this.isAuthenticated = isAuthenticated;
+
+      this.userMenuItems = [
+        { label: 'Profile', href: 'profile', canShow: this.isAuthenticated },
+        { label: 'Settings', href: 'settings', canShow: this.isAuthenticated },
+        { label: 'Logout', href: 'logout', canShow: this.isAuthenticated },
+        { label: 'Login', href: 'login', canShow: !this.isAuthenticated }
+      ]
+
     });
   }
 
@@ -52,19 +77,4 @@ export class HeaderComponent implements OnInit {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
-  login() {
-    this.oidcSecurityService.authorize();
-  }
-
-  refreshSessionCheckSession() {
-    this.oidcSecurityService.authorize();
-  }
-
-  forceRefreshSession() {
-    this.oidcSecurityService.forceRefreshSession().subscribe((result) => console.log(result));
-  }
-
-  logout() {
-    this.oidcSecurityService.logoff();
-  }
 }
