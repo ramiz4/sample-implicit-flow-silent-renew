@@ -1,13 +1,12 @@
 <h2>Welcome to home Route</h2>
 
-<p class="font-bold my-8">Is Authenticated: {{ isAuthenticated }}</p>
+<p class="font-bold my-8">
+  Is Authenticated: 
+  <span [ngClass]="isAuthenticated ? ['text-green-500'] : ['text-red-500']">
+    {{ isAuthenticated }}
+  </span>
+</p>
 
-<div class="mt-4" *ngIf="isAuthenticated">
-  Userdata loaded:
-  <pre>{{ userData$ | async | json }}</pre>
-</div>
-
-<div class="mt-4">
-  Configuration loaded:
-  <pre class="overflow-auto border border-gray-700">{{ configuration$ | async | json }}</pre>
-</div>
+<pre class="mt-4" *ngIf="isAuthenticated">
+  {{ userData$ | async | json }}
+</pre>

@@ -1,16 +1,15 @@
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+import { DashboardComponent } from './dashboard/dasboard.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
+  { path: '', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'forbidden', component: UnauthorizedComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '**', component: NotFoundComponent },

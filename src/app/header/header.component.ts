@@ -19,21 +19,17 @@ export class HeaderComponent implements OnInit {
   checkSessionChanged: any;
 
   menuItems = [
-    { label: 'Dashboard', href: 'home' },
-    { label: 'Team', href: 'team' },
-    { label: 'Projects', href: 'projects' },
-    { label: 'Calendar', href: 'calendar' },
-    { label: 'Reports', href: 'reports' }
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Team', href: '/team' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Calendar', href: '/calendar' },
+    { label: 'Reports', href: '/reports' }
   ];
 
-  userMenuItems: any[] = [];
-  //  = [
-  //   { label: 'Profile', href: 'profile', canShow: !this.isAuthenticated },
-  //   { label: 'Settings', href: 'settings', canShow: !this.isAuthenticated },
-  //   { label: 'Logout', href: 'logout', canShow: !this.isAuthenticated },
-  //   { label: 'RefreshSession', href: 'refresh-session', canShow: !this.isAuthenticated },
-  //   { label: 'Login', href: 'login', canShow: this.isAuthenticated }
-  // ]
+  userMenuItems = [
+    { label: 'Profile', href: 'profile' },
+    { label: 'Settings', href: 'settings' }
+  ];
 
   constructor(private renderer: Renderer2, private oidcSecurityService: OidcSecurityService) {
     this.renderer.listen('window', 'click', (e: Event) => {
@@ -45,10 +41,10 @@ export class HeaderComponent implements OnInit {
        * the menu and button the condition abbove must close the menu
        */
       if (
-        e.target !== this.userMenu.nativeElement && 
-        (e.target as any)?.parentElement !== this.userMenu.nativeElement && 
-        (e.target as any)?.parentElement?.parentElement !== this.userMenu.nativeElement && 
-        (e.target as any)?.parentElement?.parentElement?.parentElement !== this.userMenu.nativeElement
+        e.target !== this.userMenu?.nativeElement && 
+        (e.target as any)?.parentElement !== this.userMenu?.nativeElement && 
+        (e.target as any)?.parentElement?.parentElement !== this.userMenu?.nativeElement && 
+        (e.target as any)?.parentElement?.parentElement?.parentElement !== this.userMenu?.nativeElement
       ) {
         this.isUserMenuOpen = false;
       }
@@ -62,19 +58,19 @@ export class HeaderComponent implements OnInit {
 
     this.oidcSecurityService.isAuthenticated$.subscribe(({ isAuthenticated }) => {
       this.isAuthenticated = isAuthenticated;
-
-      this.userMenuItems = [
-        { label: 'Profile', href: 'profile', canShow: this.isAuthenticated },
-        { label: 'Settings', href: 'settings', canShow: this.isAuthenticated },
-        { label: 'Logout', href: 'logout', canShow: this.isAuthenticated },
-        { label: 'Login', href: 'login', canShow: !this.isAuthenticated }
-      ]
-
     });
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
   }
 
   toggleUserMenu() {
     this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  logout() {
+    this.oidcSecurityService.logoff();
   }
 
 }

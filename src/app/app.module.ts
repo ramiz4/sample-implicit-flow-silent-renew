@@ -3,26 +3,27 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 
+import { AuthGuardService } from './auth/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
-    UnauthorizedComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthConfigModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
